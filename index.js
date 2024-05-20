@@ -7,8 +7,20 @@ app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
+const fileupload = require("express-fileupload")
+
+app.use(fileupload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}));
+
+const cloudinary = require("./config/cloudinary")
+cloudinary.cloudinaryConnect()
+
+
 app.use(cors({
-    origin: 'https://frontend-theta-eight-17.vercel.app',
+    // origin: 'http://localhost:5173',
+    origin:'https://frontend-theta-eight-17.vercel.app/',
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }))
