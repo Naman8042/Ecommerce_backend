@@ -48,3 +48,21 @@ exports.getALl = async(req,res)=>{
         })
     }
 }
+
+exports.getProductDetails = async(req,res)=>{
+    try{
+       const {id} = req.body
+       const find = await Product.findById(id)
+       return res.json({
+        success:true,
+        data:find
+       })
+    }
+    catch(err){
+        console.log(err)
+        return res.json({
+            success:false,
+            message:"cannot find product"  
+        })
+    }
+}
